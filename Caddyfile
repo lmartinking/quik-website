@@ -1,0 +1,13 @@
+{
+	admin off
+	persist_config off
+	log {
+		output stdout
+		format console
+	}
+}
+
+:80 {
+	root * /srv
+	file_server
+}
