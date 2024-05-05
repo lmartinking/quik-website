@@ -22,6 +22,11 @@ pre-deploy:
 	kubectl create namespace $(WEBSITE)
 
 
+.PHONY: deploy-check
+deploy-check:
+	kubectl apply --dry-run=server --validate=strict -f deployment.yaml -n $(NAMESPACE)
+
+
 .PHONY: deploy
 deploy:
 	kubectl apply --validate=strict -f deployment.yaml -n $(NAMESPACE)

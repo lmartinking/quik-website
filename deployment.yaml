@@ -27,10 +27,25 @@ spec:
   selector:
     app: quik-website
 ---
+# This middleware is used to strip "/quik" from the HTTP request path,
+# as the container itself does not know what its route prefix is.
+apiVersion: traefik.io/v1alpha1
+kind: Middleware
+metadata:
+  name: middleware
+spec:
+  stripPrefix:
+    forceSlash: false
+    prefixes:
+      - /quik
+---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: quik-website-ingress
+  annotations:
+    ingress.kubernetes.io/class: "traefik"
+    traefik.ingress.kubernetes.io/router.middlewares: quik-website-middleware@kubernetescrd  # {namespace}-{name}@kubernetescrd
 spec:
   ingressClassName: traefik
   rules:
