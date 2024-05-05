@@ -24,4 +24,4 @@ pre-deploy:
 
 .PHONY: deploy
 deploy:
-	kubectl apply --validate=strict -f deployment.yaml -n $(WEBSITE)
+	kubectl apply --validate=strict -f deployment.yaml -n $(NAMESPACE)
