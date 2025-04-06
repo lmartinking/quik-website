@@ -15,6 +15,7 @@ spec:
       containers:
         - name: quik-website-container
           image: "ghcr.io/lmartinking/quik-website:latest"
+          imagePullPolicy: Always
 ---
 apiVersion: v1
 kind: Service
